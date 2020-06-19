@@ -1,0 +1,30 @@
+[
+	{
+		"title": "Ramons Landscaping",
+		"price": "$35/Biweekly",
+		"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus doloremque magnam impedit eum repellat doloribus.",
+		"avatarSrc": "assets/img/land1.jpeg",
+		"imgsrc": "assets/img/land1.jpeg"
+	},
+	{
+		"title": "WeCut Landscaping",
+		"price": "$30/Biweekly",
+		"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus doloremque magnam impedit eum repellat doloribus.",
+		"avatarSrc": "assets/img/land2.jpeg",
+		"imgsrc": "assets/img/land2.jpeg"
+	},
+	{
+		"title": "Cut-Cut Landscaping",
+		"price": "$40/Biweekly",
+		"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus doloremque magnam impedit eum repellat doloribus.",
+		"avatarSrc": "assets/img/land3.jpeg",
+		"imgsrc": "assets/img/land3.jpeg"
+	},
+	{
+		"title": "Trim-Trim Lanscaping",
+		"price": "$35/Biweekly",
+		"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus doloremque magnam impedit eum repellat doloribus.",
+		"avatarSrc": "assets/img/land4.jpeg",
+		"imgsrc": "assets/img/land4.jpeg"
+	}
+]

@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Home from '../Home/Home';
 
-const App = ({ children }) => (
-  <>
-    <Header />
-
-    <main>
-      {children}
-    </main>
-
-    <Footer />
-  </>
+const App = () => (
+  <div>
+    <Home />
+  </div>
 );
 
 export default App;

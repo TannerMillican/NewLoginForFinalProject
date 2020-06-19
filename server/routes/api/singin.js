@@ -2,22 +2,9 @@ const User = require("../../models/User");
 const UserSession = require("../../models/UserSession");
 
 module.exports = (app) => {
-    // app.get('/api/counters', (req, res, next) => {
-    //   Counter.find()
-    //     .exec()
-    //     .then((counter) => res.json(counter))
-    //     .catch((err) => next(err));
-    // });
-  
-    // app.post('/api/counters', function (req, res, next) {
-    //   const counter = new Counter();
-  
-    //   counter.save()
-    //     .then(() => res.json(counter))
-    //     .catch((err) => next(err));
-    // });
 
     app.post('/api/account/signup', (req, res, next) => {
+
         const { body } =  req;
         const {
             userName,
@@ -85,16 +72,26 @@ module.exports = (app) => {
 
     });
 
-    app.post('/api/account/signin', (req, res, next) => {
-        const { body } =  req;
-        const {
-            userName,
-            password,
-        } = body;
+    app.get('/api/account/signin', (req, res, next) => {
+        // const { body } =  req;
+        // const {
+        //     userName,
+        //     password,
+        // } = body;
 
-        let {
-            email
-        } = body;
+        // let {
+        //     email
+        // } = body;
+
+        const { query } = req;
+        const { userName } = query;
+        const { password } = query;
+
+        let { email } = query;
+
+        console.log(userName);
+        console.log(password);
+        console.log(email);
 
         if (!userName) {
             return res.send({
@@ -118,18 +115,21 @@ module.exports = (app) => {
         }
 
         let newEmail = email.toLowerCase();
+        console.log(newEmail)
 
         User.find({
             email: newEmail
         }).then(function(users) {
 
-            if(users.length != 1) {
-                return res.send({
-                    success: false,
-                    message: "Error: Invalid Password"
-                })
-            }
+            // if(users.length != 1) {
+            //     return res.send({
+            //         success: false,
+            //         message: "Error: Invalid Password"
+            //     })
+            // }
             
+            console.log(users);
+
             const user = users[0];
 
             if (!user.validPassword(password, user.password)) {
@@ -154,7 +154,49 @@ module.exports = (app) => {
                     token: doc._id
                 });
             });
+        });
+    });
+
+    app.get('/api/account/verify', (req, res, next) => {
+        const { query } = req;
+        const { token } = query;
+
+        UserSession.find({
+            _id: token,
+            isDeleted: false
+        }).then(function(sessions) {
+            if (sessions.length != 1) {
+                return res.send({
+                    success: false,
+                    message: "Error: Invalid"
+                })
+            } else {
+                return res.send({
+                    success: true,
+                    message: "Good"
+                })
+            }
         })
+    });
+
+    app.get('/api/account/logout', (req, res, next) => {
+        const { query } = req;
+        const { token } = query;
+
+        UserSession.findOneAndUpdate({
+            _id: token,
+            isDeleted: false
+        }, {
+            $set: {
+                isDeleted: true
+            }
+        }).then(function(sessions) {
+            
+            return res.send({
+                success: true,
+                message: "Good"
+            });
+        });
     });
 
 }
