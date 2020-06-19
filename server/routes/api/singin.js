@@ -73,15 +73,6 @@ module.exports = (app) => {
     });
 
     app.get('/api/account/signin', (req, res, next) => {
-        // const { body } =  req;
-        // const {
-        //     userName,
-        //     password,
-        // } = body;
-
-        // let {
-        //     email
-        // } = body;
 
         const { query } = req;
         const { userName } = query;
@@ -121,12 +112,12 @@ module.exports = (app) => {
             email: newEmail
         }).then(function(users) {
 
-            // if(users.length != 1) {
-            //     return res.send({
-            //         success: false,
-            //         message: "Error: Invalid Password"
-            //     })
-            // }
+            if(users.length != 1) {
+                return res.send({
+                    success: false,
+                    message: "Error: Invalid Password"
+                })
+            }
             
             console.log(users);
 
@@ -181,7 +172,7 @@ module.exports = (app) => {
 
     app.get('/api/account/logout', (req, res, next) => {
         const { query } = req;
-        const { token } = query;
+        const token = query.token;
 
         UserSession.findOneAndUpdate({
             _id: token,

@@ -140,28 +140,12 @@ class Home extends Component {
     console.log(signInPassword)
     console.log(signInEmail)
 
-    // fetch('/api/account/signin', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         userName: signInUserName,
-    //         password: signInPassword,
-    //         email: signInEmail,
-    //     })
-    // })
-
     fetch('/api/account/signin?userName=' + signInUserName + '&password=' + signInPassword + '&email=' + signInEmail)
     .then(res => res.json(res))
         .then(json => {
-            // this.setState({
-            //     signInError: json.message
-            // });
             if (json.success) {
               setInStorage('the_main_app', { token: json.token })
               this.setState({
-                signInError: json.message,
                 isLoading: false,
                 signInPassword: '',
                 signInUserName: '',
@@ -184,34 +168,28 @@ class Home extends Component {
   }
 
   onLogOut() {
-    this.setState({
-      isLoading: true
-    })
+    
     const obj = getFromStorage('the_main_app');
     console.log(obj);
 
-    if (obj && obj.token) {
-      const { token } = obj.token;
+    let token = obj.token;
+    console.log(token)
 
-      fetch('/api/account/logout?token=' + token)
-      .then(res => res.json())
-      .then(json => {
-        if (json.success) {
-          this.setState({
-            token: '',
-            isLoading: false
-          })
-        } else {
-          this.setState({
-            isLoading: false
-          })
-        }
-      });
-    } else {
-      this.setState({
-        isLoading: false
-      })
-    }
+    fetch('/api/account/logout?token=' + token)
+    .then(res => res.json())
+    .then(json => {
+      if (json.success) {
+        this.setState({
+          token: '',
+          isLoading: false
+        })
+        window.localStorage.clear();
+      } else {
+        this.setState({
+          isLoading: false
+        })
+      }
+    });
   }
 
   render() {
