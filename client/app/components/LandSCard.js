@@ -88,11 +88,7 @@ const LandSCard = (props) => {
 			</CardActions>
 			<Collapse in={expanded} timeout="auto" unmountOnExit>
 				<CardContent>
-					<Typography paragraph>Focus:</Typography>
-					<Typography paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, id?</Typography>
-					<Typography paragraph>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis aut temporibus mollitia rem corporis nesciunt!</Typography>
-					<Typography paragraph>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic deserunt nulla eveniet incidunt aliquam fugit vel praesentium. Repellat, repellendus sit?</Typography>
-					<Typography>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, temporibus.</Typography>
+					<Typography paragraph><strong>Send an Email to this Company!</strong></Typography>
 					<Email />
 				</CardContent>
 			</Collapse>

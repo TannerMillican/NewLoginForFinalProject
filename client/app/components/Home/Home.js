@@ -9,7 +9,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      isLoading: true,
+      // isLoading: true,
       token: '',
       signUpError: '',
       signInError: '',
@@ -44,6 +44,9 @@ class Home extends Component {
 
     if (obj && obj.token) {
       const { token } = obj.token;
+      this.setState({
+        isLoading: false
+      })
 
       fetch('/api/account/verify?token=' + token)
       .then(res => res.json())
@@ -170,10 +173,8 @@ class Home extends Component {
   onLogOut() {
     
     const obj = getFromStorage('the_main_app');
-    console.log(obj);
 
     let token = obj.token;
-    console.log(token)
 
     fetch('/api/account/logout?token=' + token)
     .then(res => res.json())

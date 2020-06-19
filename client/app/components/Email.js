@@ -1,6 +1,6 @@
 import React from "react";
+// import { renderSync } from "node-sass";
 // import { apiServer } from "nylas";
-// import KeysAPI from "../../../server/routes/api/API";
 
 class Email extends React.Component {
 
@@ -9,8 +9,17 @@ class Email extends React.Component {
         this.state = {
             clientId: '',
             clientSecret: '',
-            accessToken: ''
+            accessToken: '',
+            userName: '',
+            userEmail: '',
+            emailSubject: '',
+            emailBody: ''
         };
+
+        this.onTextBoxChangeUserName = this.onTextBoxChangeUserName.bind(this);
+        this.onTextBoxChangeUserEmail = this.onTextBoxChangeUserEmail.bind(this);
+        this.onTextBoxChangeEmailSubject = this.onTextBoxChangeEmailSubject.bind(this);
+        this.onTextBoxChangeEmailBody = this.onTextBoxChangeEmailBody.bind(this)
     }
 
     componentDidMount() {
@@ -19,42 +28,73 @@ class Email extends React.Component {
 
     getKeys() {
 
-        // API.search()
-        //     .then(res => res.json());
-        //     .then((res) => {
-        //         this.setState({
-        //             clientId: res.clientId,
-        //             clientSecret: res.clientSecret,
-        //             accessToken:res.accessToken
-        //         })
-        //     })
+        fetch('/api/keys')
+            .then(res => res.json(res))
+            .then(json => {
+                const keys = json[0];
+
+                this.setState({
+                    clientId: keys.clientID,
+                    clientSecret: keys.clientSecret,
+                    accessToken: keys.accessToken
+                })
+
+            })
     };
 
-    handleSendEmail() {
+    onTextBoxChangeUserName(event) {
+        this.setState({
+            userName: event.target.value
+        })
+    };
 
-        
+    onTextBoxChangeUserEmail(event) {
+        this.setState({
+            userName: event.target.value
+        })
+    };
 
-        // console.log(process.env.REACT_APP_ACCESS_TOKEN)
+    onTextBoxChangeEmailSubject(event) {
+        this.setState({
+            userName: event.target.value
+        })
+    };
 
-        // const Nylas = require('nylas');
+    onTextBoxChangeEmailBody(event) {
+        this.setState({
+            userName: event.target.value
+        })
+    };
 
-        // Nylas.config({
-        //     clientId: process.env.REACT_APP_CLIENT_ID,
-        //     clientSecret: process.env.REACT_APP_CLIENT_SECRET,
-        // });
+    // handleSendEmail() {
 
-        // const nylas = Nylas.with(process.env.REACT_APP_ACCESS_TOKEN);
+    //     const {
+    //         clientId,
+    //         clientSecret,
+    //         accessToken
+    //     } = this.state;
 
-        // const draft = nylas.drafts.build({
-        //     subject: document.getElementById("emailSubject").nodeValue,
-        //     body: document.getElementById("emailBody").nodeValue,
-        //     to: [{ name: document.getElementById("userName").nodeValue, email: document.getElementById("userEmail").nodeValue }]
-        // })
+    //     console.log(process.env.REACT_APP_ACCESS_TOKEN)
 
-        // draft.send().then(message => {
-        //     console.log('message was sent')
-        // })
-    }
+    //     const Nylas = require('nylas');
+
+    //     Nylas.config({
+    //         clientId: process.env.REACT_APP_CLIENT_ID,
+    //         clientSecret: process.env.REACT_APP_CLIENT_SECRET,
+    //     });
+
+    //     const nylas = Nylas.with(process.env.REACT_APP_ACCESS_TOKEN);
+
+    //     const draft = nylas.drafts.build({
+    //         subject: document.getElementById("emailSubject").nodeValue,
+    //         body: document.getElementById("emailBody").nodeValue,
+    //         to: [{ name: document.getElementById("userName").nodeValue, email: document.getElementById("userEmail").nodeValue }]
+    //     })
+
+    //     draft.send().then(message => {
+    //         console.log('message was sent')
+    //     })
+    // };
 
     render() {
         return (
@@ -62,25 +102,28 @@ class Email extends React.Component {
                 <label>
                     Your Name
                     <hr/>
-                    <input id='userName' placeholder='Your Name'/>
+                    <input type='text' value={userName} placeholder='Your Name'/>
                 </label>
+                <br/>
                 <br/>
                 <label>
                     Your Email
                     <hr/>
-                    <input id='userEmail' placeholder='Your Email'/>
+                    <input type='email' value={userEmail} placeholder='Your Email'/>
                 </label>
+                <br/>
                 <br/>
                 <label>
                     Email Subject
                     <hr/>
-                    <input id='emailSubject' placeholder='Email Subject'/>
+                    <input type='text' value={emailSubject} placeholder='Email Subject'/>
                 </label>
+                <br/>
                 <br/>
                 <label>
                     Email Body
                     <hr/>
-                    <textarea id='emailBody' placeholder='Email Body'/>
+                    <textarea type='text' value={emailBody} placeholder='Email Body'/>
                 </label>
                 <br/>
                 <button onClick={this.handleSendEmail}>
@@ -88,7 +131,7 @@ class Email extends React.Component {
                 </button>
             </div>
         )
-    }
+    };
 }
 
 export default Email;

@@ -80,10 +80,6 @@ module.exports = (app) => {
 
         let { email } = query;
 
-        console.log(userName);
-        console.log(password);
-        console.log(email);
-
         if (!userName) {
             return res.send({
                 success: false,
@@ -106,7 +102,6 @@ module.exports = (app) => {
         }
 
         let newEmail = email.toLowerCase();
-        console.log(newEmail)
 
         User.find({
             email: newEmail
@@ -118,8 +113,6 @@ module.exports = (app) => {
                     message: "Error: Invalid Password"
                 })
             }
-            
-            console.log(users);
 
             const user = users[0];
 
