@@ -74,19 +74,19 @@ class Home extends Component {
 
   onTextBoxChangeSignUpUserName(event) {
     this.setState({
-        signUpUserName: event.target.value
+      signUpUserName: event.target.value
     })
   };
 
   onTextBoxChangeSignUpPassword(event) {
     this.setState({
-        signUpPassword: event.target.value
+      signUpPassword: event.target.value
     })
   };
 
   onTextBoxChangeSignUpEmail(event) {
     this.setState({
-        signUpEmail: event.target.value
+      signUpEmail: event.target.value
     })
   };
 
@@ -118,19 +118,19 @@ class Home extends Component {
 
   onTextBoxChangeSignInUserName(event) {
     this.setState({
-        signInUserName: event.target.value
+      signInUserName: event.target.value
     })
   };
 
   onTextBoxChangeSignInPassword(event) {
     this.setState({
-        signInPassword: event.target.value
+      signInPassword: event.target.value
     })
   };
 
   onTextBoxChangeSignInEmail(event) {
     this.setState({
-        signInEmail: event.target.value
+      signInEmail: event.target.value
     })
   };
 
