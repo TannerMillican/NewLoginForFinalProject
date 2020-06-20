@@ -141,9 +141,10 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/api/account/verify', (req, res, next) => {
-        const { query } = req;
-        const { token } = query;
+    app.get('/api/account/verify?', (req, res, next) => {
+        console.log(req.query.token)
+
+        const token = req.query.token
 
         UserSession.find({
             _id: token,
@@ -160,6 +161,8 @@ module.exports = (app) => {
                     message: "Good"
                 })
             }
+        }).catch(function(err) {
+            console.log(err)
         })
     });
 

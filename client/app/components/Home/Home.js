@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'whatwg-fetch';
+// import 'whatwg-fetch';
 import { getFromStorage, setInStorage } from "../../utils/storage";
 import {Grid} from '@material-ui/core';
 import Content from '../Content';
@@ -43,7 +43,7 @@ class Home extends Component {
     console.log(obj);
 
     if (obj && obj.token) {
-      const { token } = obj.token;
+      const token = obj.token;
       this.setState({
         isLoading: false
       })
@@ -51,6 +51,7 @@ class Home extends Component {
       fetch('/api/account/verify?token=' + token)
       .then(res => res.json())
       .then(json => {
+        console.log(json)
         if (json.success) {
           this.setState({
             token,
@@ -65,6 +66,8 @@ class Home extends Component {
     } else {
       this.setState({
         isLoading: false
+      }).catch(function(err) {
+        console.log(err)
       })
     }
   }
